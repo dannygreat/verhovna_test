@@ -1,0 +1,17 @@
+{
+    "ignoreHTTPSErrors": true,
+    "headless": false,
+    "slowMo": 75,
+    "devtools": false,
+    "args": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-features=site-per-process",
+        "--disable-extensions"
+    ],
+    "defaultViewport": {
+        "width": 1024,
+        "height": 768
+    }
+}

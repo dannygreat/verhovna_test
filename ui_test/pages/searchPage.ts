@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class SearchPage {
     page: puppeteer.Page;
@@ -44,5 +43,4 @@ export class SearchPage {
             searchButton.click()
         ]);
     }
-
 }

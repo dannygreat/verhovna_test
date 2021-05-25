@@ -30,18 +30,20 @@ describe('Rada test suits', () => {
 
     test('Search information by rada', async () => {
         const searchInput = 'Президент';
+        const formCheck = 'Раніше ніж';
+        const topic = 'Новини';
         const titleText = 'Верховна Рада України';
 
         await mainPage.goSearchPage();
         await searchPage.fillSearchTitle(searchInput);
         await searchPage.openSectionInput();
-        await searchPage.selectSectionInput();
-        await searchPage.selectFormTitle();
+        await searchPage.selectTopic(topic);
+        await searchPage.selectFormTitle(formCheck);
         await searchPage.clickSearch();
 
         console.log('Результатов поиска:', await resultPage.getResult());
         console.log('Результат лейбла видео:', await resultPage.getVideoLabel());
         expect(await resultPage.getText()).toEqual(titleText);
-        expect(await resultPage.getWord()).toContain('Президент');
+        expect(await resultPage.getWord()).toContain(searchInput);
     });
 })

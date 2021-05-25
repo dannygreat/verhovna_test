@@ -34,6 +34,6 @@ export class ResultPage {
 
     async getVideoLabel() {
         await this.page.waitForSelector(this.videoResult);
-        return await this.page.$$eval(this.videoResult, label => label.length);
+        return (await this.page.$$(this.videoResult)).length;
     }
 }

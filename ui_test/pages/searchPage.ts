@@ -1,12 +1,13 @@
 import puppeteer from 'puppeteer';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class SearchPage {
     page: puppeteer.Page;
 
     searchTitleInput = "input[name='search']";
     sectionTitleInput = "//div[contains(text(), 'Усі розділи')]";
-    sectionTitle = "//div[contains(@class, 'dropdown-menu show')]//div/ul/li[4]";
-    formTitle = "//div[contains(@class, 'form-check display-inline')][2]";
+    sectionTitle = (text: string) => `//div[contains(@class, 'dropdown-menu show')]//a//span[contains(text(), "${text}")]`;
+    formCheck = (text: string) => `//div[contains(@class, 'form-check display-inline')]//label[contains(text(), "${text}")]`;
     searchButton = "a.sendcomm";
 
     constructor(page: puppeteer.Page) {
@@ -26,12 +27,12 @@ export class SearchPage {
         await (await (this.page.waitForXPath(this.sectionTitleInput))).click();
     }
 
-    async selectSectionInput() {
-        await (await (this.page.waitForXPath(this.sectionTitle))).click();
+    async selectTopic(topic: string) {
+        await (await (this.page.waitForXPath(this.sectionTitle(topic)))).click();
     }
 
-    async selectFormTitle() {
-        await (await (this.page.waitForXPath(this.formTitle))).click();
+    async selectFormTitle(form: string) {
+        await (await (this.page.waitForXPath(this.formCheck(form)))).click();
     }
 
     async clickSearch() {
